@@ -1,0 +1,60 @@
+//
+// Prefix header for all source files of the 'testMediator' target in the 'testMediator' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
+
+#ifndef OBJC_ARC_ENABLED
+#ifdef __has_feature
+#define OBJC_ARC_ENABLED __has_feature(objc_arc)
+#else
+#define OBJC_ARC_ENABLED 0
+#endif
+#endif
+
+#define SYNTHESIZE_SINGLETON_FOR_CLASS(classname) \
+\
+static classname *shared##classname = nil; \
+\
++ (classname *)shared##classname \
+{ \
+@synchronized(self) \
+{ \
+if (shared##classname == nil) \
+{ \
+shared##classname = [[self alloc] init]; \
+} \
+} \
+\
+return shared##classname; \
+} \
+\
++ (id)allocWithZone:(NSZone *)zone \
+{ \
+@synchronized(self) \
+{ \
+if (shared##classname == nil) \
+{ \
+shared##classname = [super allocWithZone:zone]; \
+return shared##classname; \
+} \
+} \
+\
+return nil; \
+} \
+\
+- (id)copyWithZone:(NSZone *)zone \
+{ \
+return self; \
+} \
+
+
