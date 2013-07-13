@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class coordinatingViewController;
 @interface secondViewController : UIViewController
-
+{
+    coordinatingViewController *_director;
+    UIButton *_button;
+}
 @end

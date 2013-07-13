@@ -7,6 +7,7 @@
 //
 
 #import "secondViewController.h"
+#import "coordinatingViewController.h"
 
 @interface secondViewController ()
 
@@ -27,6 +28,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    _button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [_button setFrame:CGRectMake(0, 0, 100, 50)];
+    [_button setCenter:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2)];
+    [_button setTitle:@"3" forState:UIControlStateNormal];
+    [_button addTarget:_director action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_button setEnabled:YES];
+    [self.view addSubview:_button];
 }
 
 - (void)didReceiveMemoryWarning
