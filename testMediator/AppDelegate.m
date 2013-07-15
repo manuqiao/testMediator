@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "coordinatingViewController.h"
-#import "thirdViewController.h"
+#import "firstViewController.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -16,9 +16,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-    thirdViewController *controller = [[thirdViewController alloc] initWithNibName:nil bundle:nil];
     
-    [self.window addSubview:controller.view];
+    
+    [self.window addSubview:[[[coordinatingViewController sharedInstance] first] view]];
     
     [self.window makeKeyAndVisible];
     return YES;

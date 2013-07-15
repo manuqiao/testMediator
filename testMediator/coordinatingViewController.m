@@ -11,8 +11,8 @@
 #import "secondViewController.h"
 #import "thirdViewController.h"
 
-@interface coordinatingViewController ()
-
+@interface coordinatingViewController (Private)
+- (id)init;
 @end
 
 @implementation coordinatingViewController
@@ -23,6 +23,7 @@ static coordinatingViewController *_sharedInstance = nil;
     @synchronized(self) {
         if (_sharedInstance == nil) {
             _sharedInstance = [[self alloc] init]; // assignment not done here
+            
         }
     }
     return _sharedInstance;
@@ -37,6 +38,15 @@ static coordinatingViewController *_sharedInstance = nil;
         }
     }
     return nil; //on subsequent allocation attempts return nil
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _first = [[firstViewController alloc] initWithNibName:nil bundle:nil];
+    }
+    return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone
@@ -59,6 +69,39 @@ static coordinatingViewController *_sharedInstance = nil;
 
 - (void)buttonClick:(id)sender
 {
+    if ([sender isKindOfClass:[UIButton class]]) {
+        switch ([(UIButton *)sender tag]) {
+            case kButtonTagOpenSecondView:
+            {
+                secondViewController *controller = [[secondViewController alloc] initWithNibName:nil bundle:nil];
+                [controller.view setFrame:self.view.frame];
+                
+                [_first presentViewController:controller animated:YES completion:nil];
+                
+                _activeController = controller;
+            }
+                break;
+            case kButtonTagOpenThirdView:
+            {
+                thirdViewController *controller = [[thirdViewController alloc] initWithNibName:nil bundle:nil];
+                [controller.view setFrame:self.view.frame];
+                
+                [_first presentViewController:controller animated:YES completion:nil];
+                
+                _activeController = controller;
+            }
+                break;
+            case kButtonTagDone:
+            {
+                [_first dismissViewControllerAnimated:YES completion:nil];
+                
+                _activeController = _first;
+            }
+                break;
+            default:
+                break;
+        }
+    }
     NSLog(@"button click");
 }
 

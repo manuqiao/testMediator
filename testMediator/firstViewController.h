@@ -11,6 +11,7 @@
 @interface firstViewController : UIViewController
 {
     coordinatingViewController *_director;
-    UIButton *_button;
+    UIButton *_btnOpenSecond;
+    UIButton *_btnOpenThird;
 }
 @end

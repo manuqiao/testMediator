@@ -12,12 +12,17 @@
 @class secondViewController;
 @class thirdViewController;
 
+typedef enum
+{
+    kButtonTagDone,
+    kButtonTagOpenSecondView,
+    kButtonTagOpenThirdView
+}ButtonTag;
 @interface coordinatingViewController : UIViewController
 
 + (coordinatingViewController*)sharedInstance;
 - (void)buttonClick:(id)sender;
 
 @property (nonatomic, readonly) firstViewController *first;
-@property (nonatomic, readonly) secondViewController *second;
-@property (nonatomic, readonly) thirdViewController *third;
+@property (nonatomic, readonly) UIViewController *activeController;
 @end

@@ -13,5 +13,4 @@
     coordinatingViewController *_director;
     UIButton *_button;
 }
-- (void)buttonClick:(id)sender;
 @end
